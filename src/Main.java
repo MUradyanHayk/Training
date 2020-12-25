@@ -15,22 +15,25 @@ public class Main {
         System.out.println("arr : " + Arrays.toString(arr));
         System.out.println("max = " + getMax(arr));
         System.out.println("min = " + getMin(arr));
+        System.out.println("sorting...");
+        sorting(arr);
+        System.out.println("arr : " + Arrays.toString(arr));
 
-        List list = new ArrayList<Integer>();
-        for (int i = 0; i < arr.length; i++) {
-            if (isSimpleNumber(arr[i])) {
-                list.add(arr[i]);
-            }
-        }
-        System.out.println("simple list : " + list);
+//        List list = new ArrayList<Integer>();
+//        for (int i = 0; i < arr.length; i++) {
+//            if (isSimpleNumber(arr[i])) {
+//                list.add(arr[i]);
+//            }
+//        }
+//        System.out.println("simple list : " + list);
 
 //        /home/armen
-
-        List<File> fileList = new ArrayList();
-        searchFiles(new File("/home/armen"),fileList);
-        for (File file : fileList) {
-            System.out.println(file.getAbsolutePath());
-        }
+//
+//        List<File> fileList = new ArrayList();
+//        searchFiles(new File("/home/armen"),fileList);
+//        for (File file : fileList) {
+//            System.out.println(file.getAbsolutePath());
+//        }
     }
 
     private static int getMin(int[] arr) {
@@ -106,6 +109,24 @@ public class Main {
                     }
                 }
             }
+        }
+    }
+
+    public static void sorting(int[] arr) {
+        int min = arr[0];
+        int minPosition = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j] < min) {
+                    min = arr[j];
+                    minPosition = j;
+                }
+            }
+            int t = arr[i];
+            arr[i] = min;
+            arr[minPosition] = t;
+            min = arr[i];
+            minPosition = i;
 
         }
     }

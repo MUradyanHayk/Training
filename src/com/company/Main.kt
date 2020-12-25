@@ -3,23 +3,28 @@ package com.company
 import java.io.File
 
 fun main(args: Array<String>) {
-    val array = arrayOf(4, 5, 2, 58, 85, 4, 8, 478, 1, 2, 1, 545, 836, 5, 47, 4, 54, 32, 3)
-    println("arr : ${array.contentToString()}")
-    reverse(array)
-    println("arr : ${array.contentToString()}")
+//    val array = arrayOf(4, 5, 2, 58, 85, 4, 8, 478, 1, 2, 1, 545, 836, 5, 47, 4, 54, 32, 3)
+//    println("arr : ${array.contentToString()}")
+//    reverse(array)
+//    println("arr : ${array.contentToString()}")
+//
+//    println("max = ${getMax(array)}")
+//    println("min = ${getMin(array)}")
+//
+//    val list = array.filter { isSimpleNumber(it) }
+//    println("simpleArr : ${list.toString()}")
+//
+//    val fileList = mutableListOf<File>()
+//    searchFiles(File("/home/armen"), fileList)
+//
+//    for (file in fileList) {
+//        println(file.absolutePath)
+//    }
 
-    println("max = ${getMax(array)}")
-    println("min = ${getMin(array)}")
-
-    val list = array.filter { isSimpleNumber(it) }
-    println("simpleArr : ${list.toString()}")
-
-    val fileList = mutableListOf<File>()
-    searchFiles(File("/home/armen"), fileList)
-
-    for (file in fileList) {
-        println(file.absolutePath)
-    }
+    var text = "dffdffsdgdfggdfgdfgd dfgdfgdfgd dfgdfgdf dfg dfg dfg g dfdfg dfg dfg fdgdfgdf gdfgdf gdfgdf dfgdfgdfg  fdgdfgdfgdfg dfgfdgdfgeddfgdfg fggr"
+    print("araj\n\n\n$text")
+    text = calculateEms(20,text)
+    print("hima\n\n\n$text")
 
 }
 
@@ -102,4 +107,30 @@ private fun searchFiles(rootFile: File, fileList: MutableList<File>) {
             }
         }
     }
+}
+
+
+fun calculateEms(ems: Int, text: String): String {
+    if (ems > 0 && text != "") {
+        var wordsCount = 0
+        var sentence = ""
+
+        for (i in text.indices) {
+            wordsCount++
+            if (text[i] == '\n') {
+                wordsCount = 0
+            }
+            if (text[i] == ' ') {
+                if (wordsCount > ems) {
+                    sentence += '\n'
+                    wordsCount = 0
+                    continue
+                }
+            }
+            sentence += text[i]
+
+        }
+        return sentence
+    }
+    return text
 }
