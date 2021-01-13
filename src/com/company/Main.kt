@@ -110,9 +110,10 @@ private fun searchFiles(rootFile: File, fileList: MutableList<File>) {
 }
 
 
-fun calculateEms(ems: Int, text: String): String {
+private fun calculateEms(ems: Int, text: String): String {
     if (ems > 0 && text != "") {
         var wordsCount = 0
+        var lastSpacePosition = 0
         var sentence = ""
 
         for (i in text.indices) {
@@ -121,8 +122,16 @@ fun calculateEms(ems: Int, text: String): String {
                 wordsCount = 0
             }
             if (text[i] == ' ') {
-                if (wordsCount > ems) {
+                lastSpacePosition = i
+            }
+            if (wordsCount > ems) {
+                if (text[i] == ' ') {
                     sentence += '\n'
+                    wordsCount = 0
+                    continue
+                } else {
+                    sentence = addChar(sentence, '\n', lastSpacePosition)!!
+                    lastSpacePosition = i
                     wordsCount = 0
                     continue
                 }
@@ -133,4 +142,8 @@ fun calculateEms(ems: Int, text: String): String {
         return sentence
     }
     return text
+}
+
+private fun addChar(str: String, ch: Char, position: Int): String? {
+    return str.substring(0, position) + ch + str.substring(position)
 }
