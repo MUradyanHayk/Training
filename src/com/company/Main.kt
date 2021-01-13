@@ -127,23 +127,27 @@ private fun calculateEms(ems: Int, text: String): String {
             if (wordsCount > ems) {
                 if (text[i] == ' ') {
                     sentence += '\n'
+                    lastSpacePosition = i
                     wordsCount = 0
                     continue
                 } else {
-                    sentence = addChar(sentence, '\n', lastSpacePosition)!!
-                    lastSpacePosition = i
+                    sentence += text[i]
+                    sentence = replaceChar(sentence, '\n', lastSpacePosition)!!
                     wordsCount = 0
                     continue
                 }
             }
             sentence += text[i]
-
         }
         return sentence
     }
     return text
 }
 
-private fun addChar(str: String, ch: Char, position: Int): String? {
-    return str.substring(0, position) + ch + str.substring(position)
+private fun replaceChar(str: String, ch: Char, position: Int): String? {
+    return if (position < str.length) {
+        str.substring(0, position) + ch + str.substring(position + 1)
+    } else {
+        str.substring(0, position) + ch
+    }
 }
