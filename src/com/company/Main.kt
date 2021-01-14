@@ -21,10 +21,7 @@ fun main(args: Array<String>) {
 //        println(file.absolutePath)
 //    }
 
-    var text = "dffdffsdgdfggdfgdfgd dfgdfgdfgd dfgdfgdf dfg dfg dfg g dfdfg dfg dfg fdgdfgdf gdfgdf gdfgdf dfgdfgdfg  fdgdfgdfgdfg dfgfdgdfgeddfgdfg fggr"
-    print("araj\n\n\n$text")
-    text = calculateEms(20,text)
-    print("hima\n\n\n$text")
+    print(rep("26 B4 97 F3 9B 50 AA 26 12 65 B2 A5 8D 04 92 C4 F7 A0 63 5A"))
 
 }
 
@@ -129,13 +126,16 @@ private fun calculateEms(ems: Int, text: String): String {
                     sentence += '\n'
                     lastSpacePosition = i
                     wordsCount = 0
-                    continue
                 } else {
                     sentence += text[i]
                     sentence = replaceChar(sentence, '\n', lastSpacePosition)!!
-                    wordsCount = 0
-                    continue
+                    wordsCount = if (sentence.length > lastSpacePosition + 1) {
+                        sentence.length - lastSpacePosition - 1
+                    } else {
+                        sentence.length - lastSpacePosition
+                    }
                 }
+                continue
             }
             sentence += text[i]
         }
@@ -151,3 +151,8 @@ private fun replaceChar(str: String, ch: Char, position: Int): String? {
         str.substring(0, position) + ch
     }
 }
+
+private fun rep(str: String):String {
+    return str.replace(" ",":")
+}
+
