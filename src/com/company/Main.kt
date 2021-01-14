@@ -129,10 +129,10 @@ private fun calculateEms(ems: Int, text: String): String {
                 } else {
                     sentence += text[i]
                     sentence = replaceChar(sentence, '\n', lastSpacePosition)!!
-                    wordsCount = if (sentence.length > lastSpacePosition + 1) {
-                        sentence.length - lastSpacePosition - 1
-                    } else {
+                    wordsCount = if (sentence.length > lastSpacePosition) {
                         sentence.length - lastSpacePosition
+                    } else {
+                        sentence.length - lastSpacePosition - 1
                     }
                 }
                 continue
